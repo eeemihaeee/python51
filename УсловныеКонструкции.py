@@ -41,28 +41,28 @@
 #if ((car_speed >= 50) or (car_speed <= 120)) and car_speed != 200:
  #   print("Машина двигается быстро! Снизьте скорость!")
 #Исключения. Обработка событий ошибки
-try:
-    amount = int(input("Введите число предметов:"))
-
-except ValueError:
-    print("Ошибка! Введите только число!!!")
-value = int(input("Введите число1"))
-value2 = int(input("Введите число2"))
-try:
-    print(f"Деление {value / value2}")
-except ZeroDivisionError:
-    print("Делить на 0 нельзя!")
-finally:
-    print("Действие с делением было выполнено!")
+# try:
+#     amount = int(input("Введите число предметов:"))
+#
+# except ValueError:
+#     print("Ошибка! Введите только число!!!")
+# value = int(input("Введите число1"))
+# value2 = int(input("Введите число2"))
+# try:
+#     print(f"Деление {value / value2}")
+# except ZeroDivisionError:
+#     print("Делить на 0 нельзя!")
+# finally:
+#     print("Действие с делением было выполнено!")
 #Практика
 #Задание 1.
 #Пользовать вводит с клавиатуры число. Нужно проверить его на
 #четность/нечетность. Если четное - вывести even, обратно - odd
-value = int(input())
-if value % 2 == 0:
-    print('even')
-else:
-    print('odd')
+# value = int(input())
+# if value % 2 == 0:
+#     print('even')
+# else:
+#     print('odd')
 #ЗАдание 2. Пользователь вводит число. Нужно проверить его
 #на кратность 7. вывести надпись : Number is multiple 7,
 #иначе : number is not multiple 7
@@ -72,22 +72,23 @@ else:
 #И найти минимум(наименьшее). Вывести его на экран.
 #Задание 5. Пользователь вводит 2 числа. В зависимости от
 # выбора пользователя, необходимо показать сложение чисел,
-#РаЗность чисел, произведение, деление, сред. арифметическое.
-value1 = int(input())
-value2 = int(input())
-userCh = int(input("Выбери действие : 1)Сложение"
-                   " \n2)Вычитание \n3)Умножение \n4)Деление"
-                   "\n Ваш выбор: "))
-if userCh == 1:
-    print(value1 + value2)
-elif userCh == 2:
-    print(value1 - value2)
-elif userCh == 3:
-    print(value1 * value2)
-elif userCh == 4:
-    try:
-        print(value1 / value2)
-    except ZeroDivisionError:
-        print("На ноль делить нельзя!")
-else:
-    print("Введены не те данные!")
+# #РаЗность чисел, произведение, деление, сред. арифметическое.
+# value1 = int(input())
+# value2 = int(input())
+# userCh = int(input("Выбери действие : 1)Сложение"
+#                    " \n2)Вычитание \n3)Умножение \n4)Деление"
+#                    "\n Ваш выбор: "))
+# if userCh == 1:
+#     print(value1 + value2)
+# elif userCh == 2:
+#     print(value1 - value2)
+# elif userCh == 3:
+#     print(value1 * value2)
+# elif userCh == 4:
+#     try:
+#         print(value1 / value2)
+#     except ZeroDivisionError:
+#         print("На ноль делить нельзя!")
+# else:
+#     print("Введены не те данные!")
+#
