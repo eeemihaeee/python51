@@ -74,7 +74,85 @@ def heap_sort(mass):
     for i in range(n-1, 0, -1):
         mass[0], mass[i] = mass[i],mass[0]
         heapify(mass, i, 0)
-        
+#Быстрая сортировка(итерация)
+def quick_sort_iterive(mass):
+    stack = [(0, len(mass)-1)]
+    while stack:
+        low, high = stack.pop()
+        if low < high:
+            pivot = mass[low]
+            i = low + 1
+            j = high
+        while True:
+            while i <= j and mass[i] <= pivot:
+                i +=1
+            while i <=j and mass[j] > pivot:
+                j -= 1
+            if i > j:
+                break
+            mass[i], mass[j] = mass[j], mass[i]
+            i += 1
+            j += 1
+        mass[low], mass[j] = mass[j], mass[low]
+        pi = j
+        stack.append(low, pi-1)
+        stack.append(pi+1, high)
+#Рекуосивная сортировка с методом случайного выбора опорного элемента(pivot)
+def quick_sort_randomized_inplace(mass):
+    def partition(mass, low, high):
+        pivot_index = random.randint(low, high)
+        mass[pivot_index], mass[low] = mass[low],mass[pivot_index]
+        pivot = mass[low]
+
+        i = low + 1
+        j = high
+        while True:
+            while i <= j and mass[i] <= pivot:
+                i +=1
+            while i <=j and mass[j] > pivot:
+                j -= 1
+            if i > j:
+                break
+            mass[i], mass[j] = mass[j], mass[i]
+            i += 1
+            j += 1
+        mass[low], mass[j] = mass[j], mass[low]
+        return j
+    def quick_sort_recursive(mass, low, high):
+        if low < high:
+            pi = partition(mass, low, high)
+            quick_sort_recursive(mass, low, pi-1)
+            quick_sort_recursive(mass, pi+1, high)
+    quick_sort_recursive(mass, 0, len(mass)-1)
+#БЫстрая сортировка по умолчанию
+def quickSort(mass):
+    if len(mass) > 1:
+        pivot = mass.pop()
+        grtr_lst, equal_lst, smlr_lst = [],[pivot],[]
+        for item in mass:
+            if item == pivot:
+                equal_lst.append(item)
+            elif item > pivot:
+                grtr_lst.append(item)
+            else:
+                smlr_lst.append(item)
+        return (quickSort(smlr_lst) + equal_lst + quickSort(grtr_lst))
+    else:
+        return mass
+#Сортировка методом Шелла
+def shellSort(mass):
+    n = len(mass)
+    interval = n // 2
+    while interval > 0:
+        for i in range(interval, n):
+            temp = mass[i]
+            j = i
+            while j >= interval and mass[j-interval] > temp:
+                mass[j] = mass[j - interval]
+                j -= interval
+            mass[j] = temp
+        interval //= 2
+    return mass
 #MAIN
 random_mass= [random.randint(1,10) for i in range(10)]
 print("Сортировка Пузырьком:")
