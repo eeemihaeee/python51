@@ -21,3 +21,17 @@ bitmap = """
                     ***                                       *    *
                     **     *                    *
 """
+print("Введите сообщение для всего мира!")
+message = input("-->")
+if message == '':
+    sys.exit()
+#Проходим в цикле по всем строкам битовой карты
+for line in bitmap.splitlines():
+    #Проходим по всем символам строки
+    for i, bit in enumerate(line):
+        if bit == ' ':
+            #Вывод пустого символа согласно пробелу  на карте
+            print(" ", end='')
+        else: #вывод символа сообщения
+            print(message[i % len(message)], end='')
+    print()#перенос на новую строку
