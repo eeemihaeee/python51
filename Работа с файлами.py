@@ -63,14 +63,14 @@ def file_collector(path): #фУНКЦИЯ ДЛЯ ЗАПИСИ В ФАЙЛ
             result['dirs'].append(dir) #ДОБАВЛЯЕМ ИХ В СЛОВАРЬ
         for file in filenames: #ПЕРЕБИРАЕМ ВСЕ ФАЙЛЫ
             result['files'].append(file) #ДОБАВЛЯЕМ ИХ В СЛОВАРЬ
-    file = open("collector.txt",'w') #СОЗДАЕМ ФАЙЛ ДЛЯ ЗАПИСИ
-    file.write("*"*4+f"Directories"+"*"*4) #ЗАГОЛОВОК
+    f = open("collector.txt",'w') #СОЗДАЕМ ФАЙЛ ДЛЯ ЗАПИСИ
+    f.write("*"*4+f"Directories"+"*"*4) #ЗАГОЛОВОК
     for dir in result['dirs']: #ЗАПИСЫВАЕМ ВСЕ ДАНННЫЕ ИЗ СЛОВАРЯ
-        file.write(f'\n {dir}\n')
-    file.write("*" * 4 + f"Files" + "*" * 4)#ЗАПИСЫВАЕМ ВСЕ ДАНННЫЕ ИЗ СЛОВАРЯ
+        f.write(f'\n {dir}\n')
+    f.write("*" * 4 + f"Files" + "*" * 4)#ЗАПИСЫВАЕМ ВСЕ ДАНННЫЕ ИЗ СЛОВАРЯ
     for file in result['files']:
-        file.write(f'\n {file}\n')
-    file.close()#ЗАКРЫТИЕ ПОТОКА
-path='C:\Program Files' #Путь, который есть на этом ПК
+        f.write(f'\n {file}\n')
+    f.close()#ЗАКРЫТИЕ ПОТОКА
+path='C:\\Program Files' #Путь, который есть на этом ПК
 file_collector(path)#ВЫЗОВ ФУНКЦИИ
 
