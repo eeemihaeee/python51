@@ -66,6 +66,7 @@ def getDeck():
             deck.append(((rank), suit)) #Добавляем старшие карты
     random.shuffle(deck) #тасуем
     return deck
+
 #Функция для ставки
 def getBet(maxBet):
     while True:
@@ -80,6 +81,38 @@ def getBet(maxBet):
         bet = int(bet)
         if 1 <= bet <= maxBet:
             return bet
+def displayCards(cards):
+    rows = ['', '', '', '', ''] # Отображаемый в каждой строке текст.
 
+    for i, card in enumerate(cards):
+        rows[0] += ' ___ ' # Выводим верхнюю строку карты.
+        if card == BLACKSIDE:
+        # Выводим рубашку карты:
+            rows[1] += '|## | '
+            rows[2] += '|###| '
+            rows[3] += '|_##| '
+        else:
+         # Выводим лицевую сторону карты:
+         rank, suit = card # Карта — структура данных типа кортеж.
+         rows[1] += '|{} | '.format(rank.ljust(2))
+         rows[2] += '| {} | '.format(suit)
+         rows[3] += '|_{}| '.format(rank.rjust(2, '_'))
+
+     # Выводим все строки на экран:
+    for row in rows:
+        print(row)
+"""Спрашиваем, какой ход хочет сделать игрок, и возвращаем 'H', если он
+219. хочет взять еще карту, 'S', если ему хватит, и 'D', если он удваивает."""
+def getMove(playerHand, money):
+    while True:
+        moves = ['(H)it', '(S)tand']
+        if len(playerHand) == 2 and money > 0:
+            moves.append('(D)ouble down')
+        movePrompt = ', '.join(moves) + '> '
+        move = input(movePrompt).upper()
+        if move in ('H', 'S'):
+            return move  # Игрок сделал допустимый ход.
+        if move == 'D' and '(D)ouble down' in moves:
+            return move  # Игрок сделал допустимый ход.
 if __name__ == '__main__':
     main()
