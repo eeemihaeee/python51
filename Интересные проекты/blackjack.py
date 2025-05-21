@@ -25,6 +25,49 @@ def main():
         while True: #будем продолжать цикл, пока у игрока не будет перебор
         # или он не скажет хватит
             displayHands(playerHand, dealerHand, False)
+            print()
+            if getHandValue(playerHand) > 21:
+                break
+            move = getMove(playerHand, money - bet)
+            if move == "D":
+                additionalBet = getBet(min(bet, (money - bet)))
+                bet += additionalBet
+                print(f"Ставка удвоена: {bet}")
+            if move in ('H','D'):
+                newCard = deck.pop()
+                rank, suit = newCard
+                print(f"Вам выпала {rank , suit} ")
+                playerHand.append(newCard)
+                if getHandValue(playerHand) > 21:
+                    continue
+            if move in ('S','D'):
+                break
+        if getHandValue(playerHand) <= 21:
+            while getHandValue(dealerHand) < 17:
+                print("Диллер берет карту...")
+                dealerHand.append(deck.pop())
+                displayHands(playerHand, dealerHand, False)
+                if getHandValue(dealerHand) > 21:
+                    break
+                input("Нажмите enter для продолжения....")
+                print('\n\n')
+        displayHands(playerHand, dealerHand, True)
+        playerValue = getHandValue(playerHand)
+        dealerValue = getHandValue(dealerHand)
+        if dealerValue > 21:
+            print(f"Диллер перебрал! Ты выйграл {bet}!!!")
+            money += bet
+        elif (playerValue >21) or (playerValue < dealerValue):
+            print("Ты проиграл!!!")
+            money -= bet
+        elif playerValue > dealerValue:
+            print(f"Диллер недобрал! Ты выйграл {bet}!!!")
+            money += bet
+        elif playerValue == dealerValue:
+            print("У вас Ничья...")
+        input("Нажмите Enter, чтобы продолжить....")
+        print('\n\n')
+
 def displayHands(playerHand, dealerHand, showDealerHand):
     # Отображаем карты игрока и диллера. Скрываем первую карту дилера,
     # если showDealerHand равно False.
