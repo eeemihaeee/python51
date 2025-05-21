@@ -23,3 +23,4 @@ with open("text_result.txt",'w') as f:
 with open('text_result.txt',"r") as f:
     with open('new_text_result.txt',"w")as fi:
         fi.writelines(f.readlines())
+# lines = len(f.readlines())
