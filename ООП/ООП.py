@@ -95,124 +95,172 @@
 # student.menu()
 
 
-class Star:
-    def __init__(self, name, galaxy):
-        self.name = name
-        self.galaxy = galaxy
-    #При обращении методом-функцией, котороя обрабатывает строки
-    #Необходимо давать обращение встроему методу __str__, кот.
-    #вернет строку для вывода\обработки
-    def __str__(self):
-        return self.name + " in " + self.galaxy
+# class Star:
+#     def __init__(self, name, galaxy):
+#         self.name = name
+#         self.galaxy = galaxy
+#     #При обращении методом-функцией, котороя обрабатывает строки
+#     #Необходимо давать обращение встроему методу __str__, кот.
+#     #вернет строку для вывода\обработки
+#     def __str__(self):
+#         return self.name + " in " + self.galaxy
+#
+# sun = Star("Sun","Milky Way")
+# print(sun)
+# #Наследование в ООП
+# class Vehicle: #SUPER_CLASS, для ниже стоящих классов
+#     pass
+# class LandVehicle(Vehicle):#Класс-наследник-подкласс
+#     pass
+# class TrackedVehicle(LandVehicle):#Класс-наследник-подкласс
+#     pass
+# # issubclass(OneClass, TwoClass) - функция для определения отношений
+# #Между классами, проверка на наследование
+# for cls1 in [Vehicle, LandVehicle, TrackedVehicle]:
+#     for cls2 in [Vehicle, LandVehicle, TrackedVehicle]:
+#         print(issubclass(cls1, cls2), end='\t')
+#     print()
+# #isinstance(objName, ClassName) = Проверка наличия у объекта
+# # определенных характеристик от класса наследника
+# myVehicle = Vehicle()
+# myLandVehicle = LandVehicle()
+# myTrackVehicle = TrackedVehicle()
+# for obj1 in [myVehicle, myLandVehicle, myTrackVehicle]:
+#     for cls2 in [Vehicle, LandVehicle, TrackedVehicle]:
+#         print(isinstance(obj1, cls2), end='\t')
+#     print()
+# #Пример 2.
+# class SampleClass:
+#     def __init__(self, value):
+#         self.value = value
+# obj1 = SampleClass(0)
+# obj2 = SampleClass(10)
+# obj3 = obj2
+# obj3.value += 1
+# print(obj1.value, obj2.value, obj3.value)
+# #Оператор is позволяет определить, относятся ли две переменные,
+# # структуры или объекты к одному объекту класса.
+# print( obj1 is obj2)
+# print(obj2 is obj3)
+# print(obj3 is obj1)
+# #Пример 3. Нахождение методов и атрибутов классов
+# class Super:
+#     def __init__(self, name):
+#         self.name = name
+#     def __str__(self):
+#         return f"Мое имя{self.name}, очень приятно!"
+# class Sub(Super):
+#     def __init__(self, name):
+#         Super.__init__(self, name)
+#
+# #MAIN
+# obj = Sub("Михаил")
+# print(obj)
+# #Пример 4.
+# class Super:
+#     supVar = 1
+# class Sub(Super):
+#     subVar = 2
+#
+# obj = Sub()
+# print(obj.subVar)
+# print(obj.supVar)
+#
+# #Пример 5.
+# class Level1:
+#     varial = 100
+#     def __init__(self):
+#         self.var1 = 100
+#     def fun1(self):
+#         return 102
+# class Level2(Level1):
+#     varial2 = 200
+#     def __init__(self):
+#         super().__init__()
+#         self.var2 = 201
+#     def fun2(self):
+#         return 202
+# class Level3(Level2):
+#     varial3 = 300
+#     def __init__(self):
+#         super().__init__()
+#         self.var3 = 301
+#     def fun3(self):
+#         return 302
+# obj = Level3()
+# print(obj.varial, obj.var1, obj.fun1())
+# print(obj.varial2, obj.var2, obj.fun2())
+# print(obj.varial3, obj.var3, obj.fun3())
+# #Пример 6. Множественное наследование
+# class SuperA:
+#     varA = 10
+#     def funA(self):
+#         return 11
+#     def SetVarA(self,value):
+#         self.varA = value
+#     def GetVarA(self):
+#         return self.varA
+# class SuperB:
+#     varB = 20
+#     def funB(self):
+#         return 22
+# class SuperC:
+#     varC = 30
+#     def funC(self):
+#         return 33
+# class SuperD(SuperA,SuperB,SuperC):
+#     pass
+#
+# #MAIN
+# obj = SuperD()
+# print(obj.varA, obj.varB, obj.varC)
+# print(obj.funA(), obj.funB(), obj.funC())
 
-sun = Star("Sun","Milky Way")
-print(sun)
-#Наследование в ООП
-class Vehicle: #SUPER_CLASS, для ниже стоящих классов
-    pass
-class LandVehicle(Vehicle):#Класс-наследник-подкласс
-    pass
-class TrackedVehicle(LandVehicle):#Класс-наследник-подкласс
-    pass
-# issubclass(OneClass, TwoClass) - функция для определения отношений
-#Между классами, проверка на наследование
-for cls1 in [Vehicle, LandVehicle, TrackedVehicle]:
-    for cls2 in [Vehicle, LandVehicle, TrackedVehicle]:
-        print(issubclass(cls1, cls2), end='\t')
-    print()
-#isinstance(objName, ClassName) = Проверка наличия у объекта
-# определенных характеристик от класса наследника
-myVehicle = Vehicle()
-myLandVehicle = LandVehicle()
-myTrackVehicle = TrackedVehicle()
-for obj1 in [myVehicle, myLandVehicle, myTrackVehicle]:
-    for cls2 in [Vehicle, LandVehicle, TrackedVehicle]:
-        print(isinstance(obj1, cls2), end='\t')
-    print()
-#Пример 2.
-class SampleClass:
-    def __init__(self, value):
-        self.value = value
-obj1 = SampleClass(0)
-obj2 = SampleClass(10)
-obj3 = obj2
-obj3.value += 1
-print(obj1.value, obj2.value, obj3.value)
-#Оператор is позволяет определить, относятся ли две переменные,
-# структуры или объекты к одному объекту класса.
-print( obj1 is obj2)
-print(obj2 is obj3)
-print(obj3 is obj1)
-#Пример 3. Нахождение методов и атрибутов классов
-class Super:
-    def __init__(self, name):
-        self.name = name
-    def __str__(self):
-        return f"Мое имя{self.name}, очень приятно!"
-class Sub(Super):
-    def __init__(self, name):
-        Super.__init__(self, name)
 
+
+#Инкапсуляция  - это второй принцип ООП, благодаря кот. классы
+# могут скрывать внутренние элементы (атрибуты и функции) от внешнего
+#Мира. Реализуется с помощью методов и атрибутов Private and Protected.
+#Private - Обозначается с помощью двойного подчеркивания "__" перед именем.
+#Доступны только внутри класса, из вне к ним обратиться нельзя.
+#Protected - Обозначается с помощью одниночного подчеркивания "_" перед именем.
+# условно защищены, но Python не запрещает доступ к ним.
+class BankAccount:
+    def __init__(self, owner, balance):
+        self._owner = owner #Защищенный атрибут
+        self.__balance = balance #Приватный атрибут
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f" Депозит {amount} успешно выполнен.")
+        else:
+            print("Сумма должна быть положительной.")
+    def withdtaw(self, amount):
+        if 0<amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Снятие {amount} успешно.")
+        else:
+            print("Недостаточно средств.")
+    def get_balance(self):
+        return self.__balance
+    def set_balance(self, amount):
+        self.__balance = amount
 #MAIN
-obj = Sub("Михаил")
-print(obj)
-#Пример 4.
-class Super:
-    supVar = 1
-class Sub(Super):
-    subVar = 2
+acount = BankAccount("Иван Иванов",1000)
+#print(acount.balance) #Ошибка
+print(f"Имя вкладчика: {acount._owner}")
+print(acount.get_balance())
+acount.set_balance(2000)
+acount.withdtaw(200)
 
-obj = Sub()
-print(obj.subVar)
-print(obj.supVar)
 
-#Пример 5.
-class Level1:
-    varial = 100
-    def __init__(self):
-        self.var1 = 100
-    def fun1(self):
-        return 102
-class Level2(Level1):
-    varial2 = 200
-    def __init__(self):
-        super().__init__()
-        self.var2 = 201
-    def fun2(self):
-        return 202
-class Level3(Level2):
-    varial3 = 300
-    def __init__(self):
-        super().__init__()
-        self.var3 = 301
-    def fun3(self):
-        return 302
-obj = Level3()
-print(obj.varial, obj.var1, obj.fun1())
-print(obj.varial2, obj.var2, obj.fun2())
-print(obj.varial3, obj.var3, obj.fun3())
-#Пример 6. Множественное наследование
-class SuperA:
-    varA = 10
-    def funA(self):
-        return 11
-    def SetVarA(self,value):
-        self.varA = value
-    def GetVarA(self):
-        return self.varA
-class SuperB:
-    varB = 20
-    def funB(self):
-        return 22
-class SuperC:
-    varC = 30
-    def funC(self):
-        return 33
-class SuperD(SuperA,SuperB,SuperC):
-    pass
 
-#MAIN
-obj = SuperD()
-print(obj.varA, obj.varB, obj.varC)
-print(obj.funA(), obj.funB(), obj.funC())
+
+
+
+
+
+
+
 
