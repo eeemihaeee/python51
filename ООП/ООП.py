@@ -225,39 +225,183 @@
 #Доступны только внутри класса, из вне к ним обратиться нельзя.
 #Protected - Обозначается с помощью одниночного подчеркивания "_" перед именем.
 # условно защищены, но Python не запрещает доступ к ним.
-class BankAccount:
-    def __init__(self, owner, balance):
-        self._owner = owner #Защищенный атрибут
-        self.__balance = balance #Приватный атрибут
+# class BankAccount:
+#     def __init__(self, owner, balance):
+#         self._owner = owner #Защищенный атрибут
+#         self.__balance = balance #Приватный атрибут
+#
+#     def deposit(self, amount):
+#         if amount > 0:
+#             self.__balance += amount
+#             print(f" Депозит {amount} успешно выполнен.")
+#         else:
+#             print("Сумма должна быть положительной.")
+#     def withdtaw(self, amount):
+#         if 0<amount <= self.__balance:
+#             self.__balance -= amount
+#             print(f"Снятие {amount} успешно.")
+#         else:
+#             print("Недостаточно средств.")
+#     def get_balance(self):
+#         return self.__balance
+#     def set_balance(self, amount):
+#         self.__balance = amount
+# #MAIN
+# acount = BankAccount("Иван Иванов",1000)
+# #print(acount.balance) #Ошибка
+# print(f"Имя вкладчика: {acount._owner}")
+# print(acount.get_balance())
+# acount.set_balance(2000)
+# acount.withdtaw(200)
 
-    def deposit(self, amount):
-        if amount > 0:
-            self.__balance += amount
-            print(f" Депозит {amount} успешно выполнен.")
-        else:
-            print("Сумма должна быть положительной.")
-    def withdtaw(self, amount):
-        if 0<amount <= self.__balance:
-            self.__balance -= amount
-            print(f"Снятие {amount} успешно.")
-        else:
-            print("Недостаточно средств.")
-    def get_balance(self):
-        return self.__balance
-    def set_balance(self, amount):
-        self.__balance = amount
+# Полиморфизм - 3 столп в ООП, заключается в использовании
+# единственной сущности(метода, оператора, объекта)
+# для обработки различных типов в различных сценариях.
+#Пример 1.
+# num1 = 1
+# num2 = 2
+# print(num1 + num2)
+# str1 = 'Python'
+# str2 = " 3.13"
+# print(str1 + str2)
+# #Пример 2. Полиморфизм функций
+# print(len("PROGRAMMING"))
+# print(len(["A","B","C"]))
+# print(len({"Name":"IVAN","AGE":56,"ADDRESS":"PERM"}))
+# #Пример 3. Полиморфизм в классах.
+# class Animal:
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+#     def info(self):
+#         print("Привет, я животное.")
+#     def make_sound(self):
+#         print("Делаю звуки животного.")
+# class Cat(Animal):
+#     def __init__(self, name, age):
+#         Animal.__init__(self,name, age)
+#     def info(self):
+#         print(f"Привет, я кошка. Меня зовут {self.name}."
+#               f"Мне {self.age} лет.")
+#     def make_sound(self):
+#         print("Мяууу")
+#
+#
+# class Dog(Animal):
+#     def __init__(self, name, age):
+#         # self.name = name
+#         # self.age = age
+#         Animal.__init__(self,name, age)
+#     def info(self):
+#         print(f"Привет, я собака. Меня зовут {self.name}."
+#               f"Мне {self.age} лет.")
+#     # def make_sound(self):
+#     #     print("Гав-Гав")
+# #МЕЙН
+# dog = Dog("Шарик", 10)
+# cat = Cat("Мурка", 6)
+# for animals in [dog,cat]:
+#     animals.make_sound()
+#     animals.info()
+#     animals.make_sound()
+#Пример 4. Переопределение методов
+# from math import pi
+# class Shape:
+#     def __init__(self, name):
+#         self.name = name
+#     def area(self):
+#         pass
+#     def fact(self):
+#         return "Я фигура для подсчета."
+#     def __str__(self):
+#         return self.name
+# class Square(Shape):
+#     def __init__(self, lenght):
+#         self.lenght = lenght
+#         Shape.__init__(self,"Square")
+#     def area(self):
+#         return self.lenght**2
+#     def fact(self):
+#         return "У меня все углы 90 градусов."
+# class Circle(Shape):
+#     def __init__(self, radius):
+#         self.radius = radius
+#         Shape.__init__(self,"Circle")
+#     def area(self):
+#         return pi*self.radius**2
+# #MAIN
+# a = Square(4)
+# b = Circle(5)
+# print(b.fact())
+# print(a.fact())
+# print(b.area())
+# print(b)
+# print(a)
+#Перегрузка(переопределение) методов в классе
+#Cложение a + b __add__(a,b)
+#Объединение seq1 + seq1 __concat__(seq1, seq2)
+#Проверка наличия obj in seq __constins__(seq, obj)
+#Деление a / b __truediv(a,b)
+#Поразрядное И a & b __add__(a,b)
+#Поразрядное ИЛИ a ^ b __xor__(a,b)
+#Поразрядная инверсия ~a   __invert__(a)
+#Поразрядное И ИЛИ a | b __or__(a, b)
+#Степень a ** b __pow__(a, b)
+#Присвоение по индексу obj[k] = a __setitem__(obj, k, a)
+#Удаление по индексу del obj[k] __delitem__(obj, k)
+#Обращение по индексу obj[k] __getitem__(obj, k)
+# остаток от деления a % b __mod__(a,b)
+#Пример 6. Создайте класс Circle(окружность).
+# Для данного класса реалуйте ряд перегруженных методов:
+#1) Проверка на равенство ради усов двух окружностей (==)
+#2) Сравнение длин двух окружностей (<,>,<=,>=)
+#3) Пропорциональное изменение размераов окружностей,
+#путем изменение радиуса (+ ,- ,+= ,-=)
+import math
+class Circle:
+    def __init__(self, radius):
+        if radius <= 0:
+            raise ValueError("Радиус должен быть положительным")
+        self.radius = radius
+    def circleference(self): #Длина окружности
+        return 2* math.pi *self.radius
+    def __eq__(self, other): #Cравнение объектов по длине
+        if not isinstance(other, Circle):
+            return NotImplemented
+        return self.radius == other.radius
+    def __gt__(self, other): #
+        return self.circleference() > other.circleference()
+    def __lt__(self, other): #
+        return self.circleference() < other.circleference()
+    def __le__(self, other): #
+        return self.circleference() <= other.circleference()
+    def __ge__(self, other): #
+        return self.circleference() >= other.circleference()
+    def __add__(self, other): # Cумма
+        return Circle(self.radius + other.radius)
+    def __str__(self): #обработка вызова print
+        return f"Circle radius={self.radius}"
+    def __sub__(self,other):
+        return Circle(self.radius - other.radius)
+    def __iadd__(self, value):
+        self.radius += value
+        return self
+    def __isub__(self,value):
+        self.radius -= value
+        return self
 #MAIN
-acount = BankAccount("Иван Иванов",1000)
-#print(acount.balance) #Ошибка
-print(f"Имя вкладчика: {acount._owner}")
-print(acount.get_balance())
-acount.set_balance(2000)
-acount.withdtaw(200)
-
-
-
-
-
+circle1 = Circle(5)
+circle2 = Circle(7)
+print( circle1 == circle2)
+print(circle1 > circle2)
+circle3 = circle1+circle2
+print(circle3)
+circle4 = circle1 - circle2
+print(circle4)
+circle1 += 3
+print(circle1)
+circle2 -= 10
+print(circle2)
 
 
 
