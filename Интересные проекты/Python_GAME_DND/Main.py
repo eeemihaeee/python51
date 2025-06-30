@@ -10,14 +10,10 @@ class Class_Hero:
         self.Luck = Luck
         self.Attack_Power = Attack_Power
         self.Strength = Strength
-        self.Actions = [self.Jump,self.Move, self.Attack, self.Deffence]
+        #self.Actions = [self.Jump,self.Move, self.Attack, self.Deffence]
     def Jump(self):
         pass
     def Move(self):
-        pass
-    def Attack(self):
-        pass
-    def Deffence(self):
         pass
 #NPC - Базовый класс с параметрами для игровых персонажей и врагов
 class NPC:
@@ -25,25 +21,26 @@ class NPC:
         self.Attack_Power = Attack_Power
         self.HP = HP
         self.Enemy_Name = enemy_name
+        # Получение урона
+    def DEFF(self, value_damage):
+            self.HP -= value_damage
+            if self.HP <= 0:
+                return f' {self.Enemy_Name} был убит.'
+            return f"{self.Enemy_Name} получил {value_damage} урона. Сейчас у него {self.HP} HP."
+        # Нанесение урона
+    def ATTACK(self):
+            return self.Attack_Power
 class Enemy(NPC):
     def __init__(self):
         self.enemy_list = ['Гоблин','Куб-Слизь','Дракон','Повелитель телей']
         NPC.__init__(self, random.randint(50,100),random.randint(100,200),self.enemy_list[random.randint(0,len(self.enemy_list)-1)])
-    #Получение урона
-    def DEFF(self,value_damage):
-        self.HP -= value_damage
-        if self.HP <= 0:
-            return f' {self.Enemy_Name} был убит.'
-        return f"{self.Enemy_Name} получил {value_damage} урона. Сейчас у него {self.HP} HP."
-    #Нанесение урона
-    def ATTACK(self):
-        return self.Attack_Power
+
 #Класс для реализации Лучника
 class Archer(Class_Hero,NPC):
     def __init__(self, Speed = 1, Intelligence =2, Strength=1, Agility=5, Luck=1, Attack_Power=5, name=''):
         Class_Hero.__init__(self,Speed,Intelligence, Strength, Agility, Luck,Attack_Power)
         NPC.__init__(self,enemy_name=name)
-        self.Ability = [self.Shot_Arche, self.Dodge,self.Ultimate] #Список способностей
+       # self.Ability = [self.Shot_Arche, self.Dodge,self.Ultimate] #Список способностей
     def Shot_Arche(self):
         pass
     def Dodge(self):
@@ -55,7 +52,7 @@ class Healer(Class_Hero,NPC):
     def __init__(self,Speed = 0,Intelligence =5, Strength=0, Agility=2, Luck=0,Attack_Power=1,name=''):
         Class_Hero.__init__(self,Speed,Intelligence, Strength, Agility, Luck,Attack_Power)
         NPC.__init__(self,enemy_name=name)
-        self.Ability = [self.Attack_middle, self.Heal, self.Ultimate]  # Список способностей
+        #self.Ability = [self.Attack_middle, self.Heal, self.Ultimate]  # Список способностей
     def Heal(self):
         pass
     def Attack_middle(self):
@@ -67,7 +64,7 @@ class Mage(Class_Hero,NPC):
     def __init__(self,Speed = 3,Intelligence =10, Strength=0, Agility=8, Luck=3,Attack_Power=8,name=''):
         NPC.__init__(self,enemy_name=name)
         Class_Hero.__init__(self,Speed,Intelligence, Strength, Agility, Luck,Attack_Power)
-        self.Ability = [self.FireBoll, self.Magic_Shild, self.Ultimate]  # Список способностей
+        #self.Ability = [self.FireBoll, self.Magic_Shild, self.Ultimate]  # Список способностей
     def FireBoll(self):
         pass
     def Ultimate(self):
@@ -79,7 +76,7 @@ class Warrior(Class_Hero,NPC):
     def __init__(self,Speed = 4,Intelligence =-1, Strength=10, Agility=1, Luck=3,Attack_Power=8,name=''):
         Class_Hero.__init__(self,Speed,Intelligence, Strength, Agility, Luck,Attack_Power)
         NPC.__init__(self,enemy_name=name)
-        self.Ability = [self.Attack_Sword, self.Deffence_Shild, self.Ultimate]  # Список способностей
+       # self.Ability = [self.Attack_Sword, self.Deffence_Shild, self.Ultimate]  # Список способностей
     def Ultimate(self):
         pass
     def Deffence_Shild(self):
@@ -104,6 +101,19 @@ class Game_Select_Hero:
               "Готовы? тогда приступим! Ответьте на пару вопросов перед игрой:")
 #Класс-Меню_Игрового_Процесса
 class Game_Process_Change:
+    def battle(self):
+        while self.Hero.HP >= 0 and self.enemy.HP >=0:
+            print("Ваши действия: \n 1. Атака \n 2. Защита \n 3. Побег(не реализован)")
+            user_choice = int(input("Ваш выбор: "))
+            match(user_choice):
+                case 1:
+                   print( self.enemy.DEFF(self.Hero.ATTACK()))
+                   print(self.Hero.DEFF(self.enemy.ATTACK()))
+                case 2:
+                    print(self.Hero.DEFF(self.enemy.ATTACK()))
+                    print(self.enemy.DEFF(self.Hero.ATTACK()))
+                case 3:
+                    pass
     def game(self):
         self.Hero = ''
         gameSelectHero = Game_Select_Hero()  # Создаем конструктор для пользователя
@@ -123,8 +133,13 @@ class Game_Process_Change:
 
         self.Game_Start = True
         while self.Game_Start:
-            enemy = Enemy()
-            print(f"Вы идете по коридору и встречаете: {enemy.Enemy_Name} \n Завязался бой!")
+            self.enemy = Enemy()
+            print(f"Вы идете по коридору и встречаете: {self.enemy.Enemy_Name} \n Завязался бой!")
+            self.battle()
+            if self.Hero.HP <= 0:
+                self.Game_Start = False
+                print("Вы погибли в подземелье( \n приходите к нам еще!")
+
 
 
 
